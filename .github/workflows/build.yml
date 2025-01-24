@@ -11,10 +11,8 @@ jobs:
   CreatTag:
     runs-on: ubuntu-latest
     steps:
-    - if: env.ENV == 1
-      uses: actions/checkout@v4
+    - uses: actions/checkout@v4
     - name: Create a new tag
-      if: env.ENV == 1
       run: |
         TAG_NAME="nightly"
         git tag $TAG_NAME
@@ -47,7 +45,7 @@ jobs:
         tar -xf zig.tar.xz && rm zig.tar.xz
         mv * zig && cd zig && export PATH=$PATH:$PWD
         cd ../..
-        zig build -Dtarget="aarch64-linux-musl" -Dcpu="kryo" -Doptimize=ReleaseFast -fno-reference-trace --zig-lib-dir "$PWD/.zig/zig/lib"
+        zig build -Dtarget="aarch64-linux-musl" -Dcpu="kryo" -Drelease-fast=true -fno-reference-trace --zig-lib-dir "$PWD/.zig/zig/lib"
     - name: Pack output
       run: |
         mv zig-out nightly
@@ -84,7 +82,7 @@ jobs:
         tar -xf zig.tar.xz && rm zig.tar.xz
         mv * zig && cd zig && export PATH=$PATH:$PWD
         cd ../..
-        zig build -Dtarget="aarch64-linux-musl" -Dcpu="kryo" -Doptimize=ReleaseSmall -fno-reference-trace --zig-lib-dir "$PWD/.zig/zig/lib"
+        zig build -Dtarget="aarch64-linux-musl" -Dcpu="kryo" -Drelease-small=true -fno-reference-trace --zig-lib-dir "$PWD/.zig/zig/lib"
     - name: Pack output
       run: |
         mv zig-out nightly
@@ -125,7 +123,7 @@ jobs:
         tar -xf zig.tar.xz && rm zig.tar.xz
         mv * zig && cd zig && export PATH=$PATH:$PWD
         cd ../..
-        zig build -Dtarget="aarch64-linux-musl" -Dcpu="cortex_x1c" -Doptimize=ReleaseFast -fno-reference-trace --zig-lib-dir "$PWD/.zig/zig/lib"
+        zig build -Dtarget="aarch64-linux-musl" -Dcpu="cortex_x1c" --Drelease-fast=true -fno-reference-trace --zig-lib-dir "$PWD/.zig/zig/lib"
     - name: Pack output
       run: |
         mv zig-out nightly
@@ -162,7 +160,7 @@ jobs:
         tar -xf zig.tar.xz && rm zig.tar.xz
         mv * zig && cd zig && export PATH=$PATH:$PWD
         cd ../..
-        zig build -Dtarget="aarch64-linux-musl" -Dcpu="cortex_x1c" -Doptimize=ReleaseSmall -fno-reference-trace --zig-lib-dir "$PWD/.zig/zig/lib"
+        zig build -Dtarget="aarch64-linux-musl" -Dcpu="cortex_x1c" -Drelease-small=true -fno-reference-trace --zig-lib-dir "$PWD/.zig/zig/lib"
     - name: Pack output
       run: |
         mv zig-out nightly
@@ -203,7 +201,7 @@ jobs:
         tar -xf zig.tar.xz && rm zig.tar.xz
         mv * zig && cd zig && export PATH=$PATH:$PWD
         cd ../..
-        zig build -Dtarget="aarch64-linux-musl" -Dcpu="baseline" -Doptimize=ReleaseFast -fno-reference-trace --zig-lib-dir "$PWD/.zig/zig/lib"
+        zig build -Dtarget="aarch64-linux-musl" -Dcpu="baseline" -Drelease-fast=true -fno-reference-trace --zig-lib-dir "$PWD/.zig/zig/lib"
     - name: Pack output
       run: |
         mv zig-out nightly
@@ -240,7 +238,7 @@ jobs:
         tar -xf zig.tar.xz && rm zig.tar.xz
         mv * zig && cd zig && export PATH=$PATH:$PWD
         cd ../..
-        zig build -Dtarget="aarch64-linux-musl" -Dcpu="baseline" -Doptimize=ReleaseSmall -fno-reference-trace --zig-lib-dir "$PWD/.zig/zig/lib"
+        zig build -Dtarget="aarch64-linux-musl" -Dcpu="baseline" -Drelease-small=true -fno-reference-trace --zig-lib-dir "$PWD/.zig/zig/lib"
     - name: Pack output
       run: |
         mv zig-out nightly
